@@ -10,6 +10,7 @@ import java.text.DecimalFormatSymbols;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +21,12 @@ public class FinancePresenter {
 
     private static final DateTimeFormatter DATE_TIME_FORMAT =
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    private static final Map<SortOption, String> SORT_LABELS = Map.of(
+            SortOption.AMOUNT_ASC, "Jumlah terkecil",
+            SortOption.AMOUNT_DESC, "Jumlah terbesar",
+            SortOption.INCOME_FIRST, "Pemasukan dulu",
+            SortOption.EXPENSE_FIRST, "Pengeluaran dulu");
 
     /** Format uang: pemisah ribuan koma dan 2 desimal, mis. {@code Rp 1,000,000.00}. */
     public String formatMoney(BigDecimal amount) {
@@ -53,12 +60,7 @@ public class FinancePresenter {
 
     /** Label opsi pengurutan. */
     public String formatSortOption(SortOption option) {
-        return switch (option) {
-            case AMOUNT_ASC -> "Jumlah terkecil";
-            case AMOUNT_DESC -> "Jumlah terbesar";
-            case INCOME_FIRST -> "Pemasukan dulu";
-            case EXPENSE_FIRST -> "Pengeluaran dulu";
-        };
+        return SORT_LABELS.get(option);
     }
 
     /** Memformat daftar transaksi menjadi teks multi-baris. */
