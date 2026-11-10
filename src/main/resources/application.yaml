@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ifs25018-pbo2026-springboot-cashflow
+  devtools:
+    restart:
+      # Dimatikan: restart DevTools membuat Vaadin menjalankan NodeTasks dua kali bersamaan
+      # (error "Invalid lock file" / FileAlreadyExistsException di src/main/frontend/generated).
+      enabled: false
+    liveload:
+      enabled: true
+
+server:
+  port: ${APP_PORT:8080}
+
+vaadin:
+  launch-browser: false
+  liveReload:
+    enabled: true
